@@ -18,3 +18,13 @@ pokerHand :: Hand -> PokerHand
 pokerHand = undefined
 
 data PokerHand
+  = HighCards
+  | OnePair
+  | TwoPair
+  | ThreeOfAKind
+  | Straight
+  | Flush
+  | FullHouse
+  | FourOfAKind
+  | StraightFlush
+  deriving (Show, Read, Eq, Ord, Enum)
