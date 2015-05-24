@@ -37,11 +37,14 @@ fourOfAKind :: Hand -> Maybe (PokerHand, Card)
 fourOfAKind = undefined
 
 fullHouse :: Hand -> Maybe (PokerHand, Card)
-fullHouse = undefined
+fullHouse h = do
+  cs1 <- nOfKindHint 3 h
+  cs2 <- nOfKindHint 2 h
+  return (FullHouse, maximum $ concat cs1 ++ concat cs2)
 
 flush :: Hand -> Maybe (PokerHand, Card)
 flush h = do
-  c <- straightFlush h
+  c <- flushHint h
   return (Flush, c)
 
 straight :: Hand -> Maybe (PokerHand, Card)
