@@ -57,7 +57,8 @@ straightHint :: Hand -> Maybe Card
 straightHint = undefined
 
 flushHint :: Hand -> Maybe Card
-flushHint = undefined
+flushHint (Hand (x:xs)) =
+  if all ((cardSuit x==).cardSuit) xs then Just (last xs) else Nothing
 
 nOfKindHint :: Int -> Hand -> Maybe [[Card]]
 nOfKindHint = undefined
