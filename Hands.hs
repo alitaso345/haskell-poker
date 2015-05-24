@@ -52,7 +52,9 @@ twoPair :: Hand -> Maybe (PokerHand, Card)
 twoPair = undefined
 
 onePair :: Hand -> Maybe (PokerHand, Card)
-onePair = undefined
+onePair h = do
+  cs <- nOfKindHint 2 h
+  return (OnePair, last $ concat cs)
 
 straightHint :: Hand -> Maybe Card
 straightHint (Hand l) =
