@@ -40,7 +40,9 @@ fullHouse :: Hand -> Maybe (PokerHand, Card)
 fullHouse = undefined
 
 flush :: Hand -> Maybe (PokerHand, Card)
-flush = undefined
+flush h = do
+  c <- straightFlush h
+  return (Flush, c)
 
 straight :: Hand -> Maybe (PokerHand, Card)
 straight h = do
