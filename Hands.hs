@@ -70,3 +70,9 @@ nOfKindHint n (Hand h) = if cards /= [] then Just cards else Nothing
 isStraight :: [Int] -> Bool
 isStraight xs@(x:_) = xs == [x .. x+4]
 isStraight _ = False
+
+judgeStraight :: [(Int, Card)] -> Maybe Card
+judgeStraight =
+  if isStraight $ map fst l
+    then Just . snd . last $ l
+    else Nothing
