@@ -46,7 +46,9 @@ straight :: Hand -> Maybe (PokerHand, Card)
 straight = undefined
 
 threeOfAKind :: Hand -> Maybe (PokerHand, Card)
-threeOfAKind = undefined
+threeOfAKind h = do
+  cs <- nOfKindHint 3 h
+  return (ThreeOfAKind, last $ concat cs)
 
 twoPair :: Hand -> Maybe (PokerHand, Card)
 twoPair h = do
