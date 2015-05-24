@@ -76,3 +76,6 @@ judgeStraight =
   if isStraight $ map fst l
     then Just . snd . last $ l
     else Nothing
+
+extract :: (b -> a) -> [b] -> [(a, b)]
+extract f = map (\c -> (f c, c))
