@@ -7,7 +7,7 @@ import Hands
 main :: IO ()
 main = do
   hand <- randomHand
-  res <- return $ judgePoker hand
+  let res = judgePoker hand
   print $ show hand ++ " -> " ++ show res
 
 randomHand :: IO (Maybe Hand)
