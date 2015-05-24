@@ -54,7 +54,10 @@ onePair :: Hand -> Maybe (PokerHand, Card)
 onePair = undefined
 
 straightHint :: Hand -> Maybe Card
-straightHint = undefined
+straightHint (Hand l) =
+  (judgeStraight . extract cardStrength $ l)
+  `mplus`
+  (judgeStraight . sort . extract cardNumber $ l)
 
 flushHint :: Hand -> Maybe Card
 flushHint (Hand (x:xs)) =
