@@ -43,7 +43,9 @@ flush :: Hand -> Maybe (PokerHand, Card)
 flush = undefined
 
 straight :: Hand -> Maybe (PokerHand, Card)
-straight = undefined
+straight h = do
+  c <- straightHint h
+  return (Straight, c)
 
 threeOfAKind :: Hand -> Maybe (PokerHand, Card)
 threeOfAKind h = do
