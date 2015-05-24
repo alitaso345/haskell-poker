@@ -1,6 +1,18 @@
 module Hands
   ( Hand
   , toHand, fromHand
+  , PokerHand(..)
+  , pokerHand
+  , straightHint
+  , flushHint
+  , nOfKindHint
+  , straightFlush
+  , fourOfAKind
+  , fullHouse
+  , straight
+  , threeOfAKind
+  , twoPair
+  , onePair
   ) where
 
 import Cards
