@@ -5,6 +5,7 @@ module Hands
 
 import Cards
 import Data.List
+import Control.Monad
 
 newtype Hand = Hand { fromHand :: [Card] } deriving (Show, Eq, Ord)
 
@@ -58,6 +59,16 @@ straightHint (Hand l) =
   (judgeStraight . extract cardStrength $ l)
   `mplus`
   (judgeStraight . sort . extract cardNumber $ l)
+    where
+      isStraight :: [Int] -> Bool
+      isStraight xs@(x:_) = xs == [x .. x+4]
+      isStraight _ = False
+
+      judgeStraight :: [(Int, Card)] -> Maybe Card
+      judgeStraight l =
+        if isStraight $ map fst l
+          then Just . snd . last $ l
+          else Nothing
 
 flushHint :: Hand -> Maybe Card
 flushHint (Hand (x:xs)) =
@@ -69,16 +80,6 @@ nOfKindHint n (Hand h) = if cards /= [] then Just cards else Nothing
     cards :: [[Card]]
     cards = filter ((==n).length)
       $ groupBy (\x y -> cardNumber x == cardNumber y) h
-
-isStraight :: [Int] -> Bool
-isStraight xs@(x:_) = xs == [x .. x+4]
-isStraight _ = False
-
-judgeStraight :: [(Int, Card)] -> Maybe Card
-judgeStraight =
-  if isStraight $ map fst l
-    then Just . snd . last $ l
-    else Nothing
 
 extract :: (b -> a) -> [b] -> [(a, b)]
 extract f = map (\c -> (f c, c))

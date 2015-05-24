@@ -4,6 +4,7 @@ module Cards
   , allCards
   , cardSuit
   , cardNumber
+  , cardStrength
   ) where
 
 data Suit = Hearts | Diamonds | Clubs | Spades
