@@ -34,7 +34,9 @@ straightFlush :: Hand -> Maybe (PokerHand, Card)
 straightFlush = undefined
 
 fourOfAKind :: Hand -> Maybe (PokerHand, Card)
-fourOfAKind = undefined
+fourOfAKind h = do
+ cs <- nOfKindHint 4 h
+ return (FourOfAKind, maximum $ concat cs)
 
 fullHouse :: Hand -> Maybe (PokerHand, Card)
 fullHouse h = do
