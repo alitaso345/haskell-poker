@@ -30,6 +30,18 @@ data PokerHand
   | StraightFlush
   deriving (Show, Read, Eq, Ord, Enum)
 
+hands :: [Hand -> Maybe (PokerHand, Card)]
+hands =
+  [ straightFlush
+  , fourOfAKind
+  , fullHouse
+  , flush
+  , straight
+  , threeOfAKind
+  , twoPair
+  , onePair
+  ]
+
 straightFlush :: Hand -> Maybe (PokerHand, Card)
 straightFlush h = do
   c <- straightHint h
