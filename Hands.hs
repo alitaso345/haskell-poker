@@ -61,4 +61,8 @@ flushHint (Hand (x:xs)) =
   if all ((cardSuit x==).cardSuit) xs then Just (last xs) else Nothing
 
 nOfKindHint :: Int -> Hand -> Maybe [[Card]]
-nOfKindHint = undefined
+nOfKindHint n (Hand h) = if cards /= [] then Just cards else Nothing
+  where
+    cards :: [[Card]]
+    cards = filter ((==n).length)
+      $ groupBy (\x y -> cardNumber x == cardNumber y) h
