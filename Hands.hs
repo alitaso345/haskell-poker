@@ -52,3 +52,9 @@ twoPair = undefined
 
 onePair :: Hand -> Maybe (PokerHand, Card)
 onePair = undefined
+
+straightHint :: Hand -> Maybe Card
+straightHint = undefined
+
+flushHint :: Hand -> Maybe Card
+flushHint = undefined
