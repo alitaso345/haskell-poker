@@ -66,3 +66,7 @@ nOfKindHint n (Hand h) = if cards /= [] then Just cards else Nothing
     cards :: [[Card]]
     cards = filter ((==n).length)
       $ groupBy (\x y -> cardNumber x == cardNumber y) h
+
+isStraight :: [Int] -> Bool
+isStraight xs@(x:_) = xs == [x .. x+4]
+isStraight _ = False
