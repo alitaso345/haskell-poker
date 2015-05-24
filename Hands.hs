@@ -58,3 +58,6 @@ straightHint = undefined
 
 flushHint :: Hand -> Maybe Card
 flushHint = undefined
+
+nOfKindHint :: Int -> Hand -> Maybe [[Card]]
+nOfKindHint = undefined
