@@ -9,15 +9,6 @@ import Control.Monad
 
 newtype Hand = Hand { fromHand :: [Card] } deriving (Show, Eq, Ord)
 
-toHand :: [Card] -> Maybe Hand
-toHand l =
-  if length l == 5
-    then Just $ Hand (sort l)
-    else Nothing
-
-pokerHand :: Hand -> (PokerHand, Card)
-pokerHand = undefined
-
 data PokerHand
   = HighCards
   | OnePair
@@ -30,17 +21,29 @@ data PokerHand
   | StraightFlush
   deriving (Show, Read, Eq, Ord, Enum)
 
-hands :: [Hand -> Maybe (PokerHand, Card)]
-hands =
-  [ straightFlush
-  , fourOfAKind
-  , fullHouse
-  , flush
-  , straight
-  , threeOfAKind
-  , twoPair
-  , onePair
-  ]
+toHand :: [Card] -> Maybe Hand
+toHand l =
+  if length l == 5
+    then Just $ Hand (sort l)
+    else Nothing
+
+pokerHand :: Hand -> (PokerHand, Card)
+pokerHand h@(Hand l) =
+  case foldl mplus Nothing $ fmap ($h) hands of
+    Just pc -> pc
+    Nothing -> (HighCards, last l)
+  where
+    hands :: [Hand -> Maybe (PokerHand, Card)]
+    hands =
+      [ straightFlush
+      , fourOfAKind
+      , fullHouse
+      , flush
+      , straight
+      , threeOfAKind
+      , twoPair
+      , onePair
+      ]
 
 straightFlush :: Hand -> Maybe (PokerHand, Card)
 straightFlush h = do
