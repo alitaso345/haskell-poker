@@ -31,7 +31,10 @@ data PokerHand
   deriving (Show, Read, Eq, Ord, Enum)
 
 straightFlush :: Hand -> Maybe (PokerHand, Card)
-straightFlush = undefined
+straightFlush h = do
+  c <- straightHint h
+  d <- flushHint h
+  return (StraightFlush, max c d)
 
 fourOfAKind :: Hand -> Maybe (PokerHand, Card)
 fourOfAKind h = do
