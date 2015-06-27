@@ -24,5 +24,11 @@ type DiscardList = [Card] -- 捨て札
 type Deck = [Card]        -- 山札
 
 drawHand :: Deck -> DiscardList -> Hand -> Maybe (Hand, Deck)
+
 getHand :: Deck -> Maybe (Hand, Deck)
+getHand deck = do
+  hand <- toHand . take 5 $ deck
+  return (hand, drop 5 deck)
+
 getDiscardList :: Hand -> IO (Maybe DiscardList)
+
