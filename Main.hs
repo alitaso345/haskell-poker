@@ -1,8 +1,10 @@
 module Main where
 import System.Random.Shuffle
 import Data.List
+import Data.Char
 import Cards
 import Hands
+import Safe
 
 main :: IO ()
 main = do
@@ -40,10 +42,16 @@ getHand deck = do
 getDiscardList :: Hand -> IO (Maybe DiscardList)
 getDiscardList h = do
   input <- getLine
-  return . Just . selectByIndexes (fromHand h) $ toIntList input
+  return $ do
+    intList <- toIntList input
+    res <- selectByIndexes (fromHand h) intList
+    return res
 
-toIntList :: String -> [Int]
-toIntList = map $ read . (:[])
+toIntList :: String -> Maybe [Int]
+toIntList str = if and $ map isDigit str then Just $ reads str else Nothing
+  where
+    reads :: String -> [Int]
+    reads = map $ read . (:[])
 
-selectByIndexes :: [a] -> [Int] -> [a]
-selectByIndexes l = map ((l!!).(subtract 1))
+selectByIndexes :: [a] -> [Int] -> Maybe [a]
+selectByIndexes l = sequence . map ((atMay l).(subtract 1))
