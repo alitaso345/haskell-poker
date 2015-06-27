@@ -38,4 +38,12 @@ getHand deck = do
   return (hand, drop 5 deck)
 
 getDiscardList :: Hand -> IO (Maybe DiscardList)
+getDiscardList h = do
+  input <- getLine
+  return . Just . selectByIndexes (fromHand h) $ toIntList input
 
+toIntList :: String -> [Int]
+toIntList = map $ read . (:[])
+
+selectByIndexes :: [a] -> [Int] -> [a]
+selectByIndexes l = map ((l!!)).(subtract 1)
