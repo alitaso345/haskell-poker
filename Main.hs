@@ -46,4 +46,4 @@ toIntList :: String -> [Int]
 toIntList = map $ read . (:[])
 
 selectByIndexes :: [a] -> [Int] -> [a]
-selectByIndexes l = map ((l!!)).(subtract 1)
+selectByIndexes l = map ((l!!).(subtract 1))
