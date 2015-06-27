@@ -19,3 +19,8 @@ judgePoker :: Maybe Hand -> Maybe (PokerHand, Card)
 judgePoker h = do
   i <- h
   return $ pokerHand i
+
+type DiscardList = [Card] -- 捨て札
+type Deck = [Card]        -- 山札
+
+drawHand :: Deck -> DiscardList -> Hand -> Maybe (Hand, Deck)
