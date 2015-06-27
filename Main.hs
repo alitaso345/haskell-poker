@@ -25,3 +25,4 @@ type Deck = [Card]        -- 山札
 
 drawHand :: Deck -> DiscardList -> Hand -> Maybe (Hand, Deck)
 getHand :: Deck -> Maybe (Hand, Deck)
+getDiscardList :: Hand -> IO (Maybe DiscardList)
